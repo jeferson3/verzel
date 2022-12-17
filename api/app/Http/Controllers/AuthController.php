@@ -19,7 +19,7 @@ class AuthController extends Controller
     /**
      * @OA\Post (
      *     path="/auth/login",
-     *     summary="PostController",
+     *     summary="AuthController",
      *     @OA\Response(response="200", description="Response with success"),
      *     @OA\Response(response="400", description="Response with error"),
      *     tags={"Auth"},
@@ -53,7 +53,7 @@ class AuthController extends Controller
     /**
      * @OA\Post (
      *     path="/auth/logout",
-     *     summary="PostController",
+     *     summary="AuthController",
      *     @OA\Response(response="200", description="Response with success"),
      *     tags={"Auth"},
      *     security={{ "jwt": {} }}
