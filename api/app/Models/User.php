@@ -22,6 +22,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'token'
     ];
 
     /**
@@ -69,6 +70,9 @@ class User extends Authenticatable implements JWTSubject
      */
     public function responseWithToken($token): array
     {
+        $user = auth()->guard('api')->user();
+        $user->token = $token;
+        $user->save();
         return [
             'status'    => true,
             'timestamp' => now(),
