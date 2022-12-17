@@ -19,4 +19,7 @@ Route::group(['prefix' => '/v1'], function (){
         Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
         Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     });
+
+    Route::get('/vehicles', [\App\Http\Controllers\VehiclesController::class, 'index']);
+
 });
