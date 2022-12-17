@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PaginationResponse extends JsonResource
+class VehiclePublicResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,13 +17,12 @@ class PaginationResponse extends JsonResource
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
         return [
-            'status'    => true,
-            'timestamp' => now(),
-            'data'      => $this->resource['data'],
-            'pages'     => intval($this->resource['pages']),
-            'page'      => intval($this->resource['page']),
-            'per_page'  => intval($this->resource['per_page']),
-            'total'     => intval($this->resource['total'])
+            'token'     => md5($this->id),
+            'name'      => $this->name,
+            'brand'     => $this->Brand->name,
+            'model'     => $this->Model->name,
+            'image'     => $this->photo,
+            'value'     => 'R$ ' . number_format($this->price, 2, ',', '.')
         ];
     }
 }

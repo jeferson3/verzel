@@ -13,7 +13,8 @@ class VehiclesController extends Controller
     private Model $model;
     public function __construct()
     {
-        $this->middleware('jwt');
+        $this->middleware('jwt')
+            ->only('show');
         $this->model = new Vehicle();
     }
 
@@ -65,7 +66,7 @@ class VehiclesController extends Controller
 
         return (new PaginationResponse($this->model->pagination($page, $limite, $search)))
             ->response()
-            ->setStatusCode(401);
+            ->setStatusCode(200);
     }
 
 }
