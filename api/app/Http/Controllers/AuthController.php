@@ -63,7 +63,7 @@ class AuthController extends Controller
      */
     public function logout(): JsonResponse
     {
-        auth()->logout();
+        auth()->guard('api')->logout();
         return (new SuccessResponse(true))
             ->response();
     }
