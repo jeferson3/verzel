@@ -19,8 +19,10 @@ Route::group(['prefix' => '/v1'], function (){
         Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
         Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     });
-
-    Route::get('/vehicles', [\App\Http\Controllers\VehiclesController::class, 'index']);
-    Route::apiResource('/admin/vehicles', \App\Http\Controllers\Admin\VehiclesController::class);
-
+    Route::group(['prefix' => '/public'], function (){
+        Route::get('/vehicles', [\App\Http\Controllers\VehiclesController::class, 'index']);
+    });
+    Route::group(['prefix' => '/admin'], function (){
+        Route::apiResource('/vehicles', \App\Http\Controllers\Admin\VehiclesController::class);
+    });
 });
