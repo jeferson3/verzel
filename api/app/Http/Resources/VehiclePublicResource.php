@@ -21,7 +21,7 @@ class VehiclePublicResource extends JsonResource
             'name'      => $this->name,
             'brand'     => $this->Brand->name,
             'model'     => $this->Model->name,
-            'image'     => $this->photo,
+            'image'     => asset('storage/' . $this->photo),
             'value'     => 'R$ ' . number_format($this->price, 2, ',', '.')
         ];
     }

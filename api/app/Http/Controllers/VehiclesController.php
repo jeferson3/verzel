@@ -20,7 +20,7 @@ class VehiclesController extends Controller
 
     /**
      * @OA\Get (
-     *     path="/vehicles",
+     *     path="/public/vehicles",
      *     summary="VehiclesController",
      *     @OA\Response(response="200", description="Response with success"),
      *     @OA\Response(response="500", description="Response with error"),
