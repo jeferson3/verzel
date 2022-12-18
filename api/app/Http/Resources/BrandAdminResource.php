@@ -2,11 +2,12 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Client\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShowResponse extends JsonResource
+class BrandAdminResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +18,9 @@ class ShowResponse extends JsonResource
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
         return [
-            'status'    => true,
-            'timestamp' => now(),
-            'data'      => $this->resource['data'] ?? []
+            'id'        => $this->id,
+            'name'      => $this->name,
+            'date'      => Carbon::parse(strtotime($this->created_at))->format('d/m/Y')
         ];
     }
 }

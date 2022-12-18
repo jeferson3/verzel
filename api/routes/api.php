@@ -21,5 +21,6 @@ Route::group(['prefix' => '/v1'], function (){
     });
 
     Route::get('/vehicles', [\App\Http\Controllers\VehiclesController::class, 'index']);
+    Route::apiResource('/admin/vehicles', \App\Http\Controllers\Admin\VehiclesController::class);
 
 });

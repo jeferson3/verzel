@@ -64,7 +64,7 @@ class VehiclesController extends Controller
         $page   = $request->get('page') ?? 1;
         $search = $request->get('search') ?? "";
 
-        return (new PaginationResponse($this->model->pagination($page, $limite, $search)))
+        return (new PaginationResponse($this->model->pagination($page, $limite, $search, Vehicle::PUBLIC)))
             ->response()
             ->setStatusCode(200);
     }
