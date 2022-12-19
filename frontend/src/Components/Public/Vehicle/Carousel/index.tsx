@@ -5,27 +5,23 @@ import { Carousel } from "react-bootstrap";
 import {CarouselItem} from "../../../Styled/Carousel";
 
 import "./style.css";
+import {IVehicle} from "../../../../types/context_vehicle";
 
 type Props = {
-    images: Array<ImageI>
+    vehicles: Array<IVehicle>
 }
 
-interface ImageI {
-    path: string,
-    title: string,
-    description: string
-}
+export const CarouselVehicle: React.FC<Props> = ({ vehicles }) => {
 
-export const CarouselVehicle: React.FC<Props> = ({ images }) => {
-
+    console.log('vehicles', vehicles)
     return (
         <Carousel variant="dark">
             {
-                images.map((img, index) => (
-                    <CarouselItem path={img.path} key={index} >
+                vehicles && vehicles.map((vehicle, index) => (
+                    <CarouselItem path={vehicle.image} key={index} >
                         <Carousel.Caption>
-                            <h5>{img.title}</h5>
-                            <p>{img.description}</p>
+                            <h5>{vehicle.name}</h5>
+                            <p>{vehicle.description}</p>
                         </Carousel.Caption>
                     </CarouselItem>
                 ))

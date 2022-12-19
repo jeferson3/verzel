@@ -1,12 +1,13 @@
 import React from "react";
 
 export interface IVehicle {
-    id: number,
+    token: string,
     name: string,
-    brand_id: number,
-    model_id: number,
-    photo: string,
-    price: number,
+    description: string,
+    brand: number,
+    model: number,
+    image: string,
+    value: string,
 }
 
 export type ContextVehicleType = {
@@ -31,4 +32,14 @@ export interface StateVehicle {
 export enum Types {
     SET_LOADING = 'SET_LOADING',
     SET_VEHICLES = 'SET_VEHICLES'
+}
+
+export interface IVehicleResponseAPI {
+    data: Array<IVehicle>,
+    page: number,
+    pages: number,
+    per_page: number,
+    status: boolean,
+    timestamp: string,
+    total: number,
 }

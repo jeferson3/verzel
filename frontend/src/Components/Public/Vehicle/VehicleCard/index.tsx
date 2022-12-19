@@ -1,42 +1,37 @@
 import {Button, Card, Col, Row} from "react-bootstrap";
 
 import "./style.css";
+import {IVehicle} from "../../../../types/context_vehicle";
 
 type MainProps = {
-    images: Array<ImageI>
+    vehicles: Array<IVehicle>
 }
 
 type Props = {
-    image: ImageI
+    vehicle: IVehicle
 }
 
-interface ImageI {
-    path: string,
-    title: string,
-    description: string
-}
-
-export const CardVehicleContainer: React.FC<MainProps> = ({images}) => {
+export const CardVehicleContainer: React.FC<MainProps> = ({vehicles}) => {
     return (
-        <div className="d-flex m-0 justify-content-around align-items-center p-5">
+        <div className="row m-0 justify-content-around align-items-center p-5">
             {
-                images.map((img, index) => (
-                    <div key={index} className="d-flex flex-column align-self-center text-center m-0">
-                        <CardVehicle image={img} />
+                vehicles.map((v, index) => (
+                    <div key={index} className="col col-md-4 align-self-center text-center m-0">
+                        <CardVehicle vehicle={v} />
                     </div>
                 ))
             }
         </div>
     );
 }
-const CardVehicle: React.FC<Props> = ({image}) => {
+const CardVehicle: React.FC<Props> = ({vehicle}) => {
     return (
         <Card style={{width: '18rem'}}>
-            <Card.Img variant="top" src={image.path}/>
+            <Card.Img variant="top" src={vehicle.image}/>
             <Card.Body>
-                <Card.Title>{image.title}</Card.Title>
+                <Card.Title>{vehicle.name}</Card.Title>
                 <Card.Text>
-                    {image.description.substring(0, 100) + "..."}
+                    {vehicle.description.substring(0, 100) + "..."}
                 </Card.Text>
                 <Button variant="primary">Visualizar</Button>
             </Card.Body>

@@ -1,4 +1,4 @@
-import {Types, IVehicle, ActionVehicle} from '../../../types/context_vehicle';
+import {Types, IVehicle, ActionVehicle, IVehicleResponseAPI} from '../../../types/context_vehicle';
 import {PUBLIC_API as Api} from "../../../Services/Api";
 import {AxiosResponse} from 'axios';
 import React from "react";
@@ -18,12 +18,12 @@ export const getVehicles = (page: number = 1, per_page: number = 10, dispatch: R
             per_page
         }
     })
-        .then((res: AxiosResponse<Array<IVehicle>>) => {
-            console.log(res)
+        .then((res: AxiosResponse<IVehicleResponseAPI>) => {
             dispatch({
                 type: Types.SET_VEHICLES, payload: {
-                    data: res.data,
-                    page
+                    data: res.data.data,
+                    page,
+                    per_page
                 }
             });
         })

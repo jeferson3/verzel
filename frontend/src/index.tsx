@@ -29,7 +29,7 @@ ReactDOM.render(
                     render={({ match: { url } }) => (
                         <VehicleContextProvider>
                             <Route path={`${url}`} component={Home} exact />
-                            <Route path={`${url}/veiculos-usados`} component={Vehicle} />
+                            <Route path={`${url}/veiculos`} component={Vehicle} />
                         </VehicleContextProvider>
                     )}
                 />

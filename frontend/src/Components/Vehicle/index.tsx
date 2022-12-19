@@ -9,7 +9,7 @@ export const VehicleCard: React.FC<Props> = ({ vehicle }) => {
     return (
         <>
             <tr>
-                <td>{vehicle.id}</td>
+                <td>{vehicle.token}</td>
                 <td>{vehicle.name}</td>
             </tr>
         </>
