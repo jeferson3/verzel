@@ -14,7 +14,7 @@ export const Vehicle = () => {
 
     useEffect(function () {
         if (isMounted.current) {
-            getVehicles(1, 5, dispatch);
+            getVehicles(1, 5, "", dispatch);
         }
         return () => {
             isMounted.current = false;

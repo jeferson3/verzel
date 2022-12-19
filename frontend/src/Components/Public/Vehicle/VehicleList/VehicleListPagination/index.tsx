@@ -14,7 +14,7 @@ export const VehicleListPagination: React.FC<Props> = ({ vehicles }) => {
     const totalPages = Object.keys(new Array(pages).fill(null)).map(Number)
 
     const paginateVehicles = (pageNumber: number) => {
-        getVehicles(pageNumber, 5, dispatch);
+        getVehicles(pageNumber, 5, "", dispatch);
     }
 
     return (

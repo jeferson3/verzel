@@ -7,7 +7,7 @@ export const setLoading = (dispatch: React.Dispatch<ActionVehicle>) => {
     dispatch({type: Types.SET_LOADING});
 };
 
-export const getVehicles = (page: number = 1, per_page: number = 10, dispatch: React.Dispatch<ActionVehicle>) => {
+export const getVehicles = (page: number = 1, per_page: number = 10, search = "", dispatch: React.Dispatch<ActionVehicle>) => {
     setLoading(dispatch);
 
     Api({
@@ -15,7 +15,8 @@ export const getVehicles = (page: number = 1, per_page: number = 10, dispatch: R
         method: "GET",
         params: {
             page,
-            per_page
+            per_page,
+            search
         }
     })
         .then((res: AxiosResponse<IVehicleResponseAPI>) => {
