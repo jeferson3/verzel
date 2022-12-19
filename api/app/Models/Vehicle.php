@@ -41,8 +41,8 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
         $bind  = array();
 
         if (!empty($filter)) {
-            $where .= " AND (name like CONCAT('%', ?, '%') or description like CONCAT('%', ?, '%')";
-            $bind = array($filter);
+            $where .= " AND (name like CONCAT('%', ?, '%') or description like CONCAT('%', ?, '%'))";
+            $bind = array($filter, $filter);
         }
 
         $data   = $this->whereRaw($where, $bind);
