@@ -18,6 +18,7 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
 
     protected $fillable = [
         'name',
+        'description',
         'brand_id',
         'model_id',
         'photo',
@@ -40,7 +41,7 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
         $bind  = array();
 
         if (!empty($filter)) {
-            $where .= " AND name like CONCAT('%', ?, '%')";
+            $where .= " AND (name like CONCAT('%', ?, '%') or description like CONCAT('%', ?, '%')";
             $bind = array($filter);
         }
 

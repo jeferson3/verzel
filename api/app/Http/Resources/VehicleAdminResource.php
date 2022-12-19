@@ -18,13 +18,14 @@ class VehicleAdminResource extends JsonResource
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
         return [
-            'id'        => $this->id,
-            'name'      => $this->name,
-            'brand'     => BrandAdminResource::make($this->whenLoaded('Brand')),
-            'model'     => ModelAdminResource::make($this->whenLoaded('Model')),
-            'photo'     => $this->photo,
-            'price'     => $this->price,
-            'date'      => Carbon::parse(strtotime($this->created_at))->format('d/m/Y')
+            'id'            => $this->id,
+            'name'          => $this->name,
+            'description'   => $this->description,
+            'brand'         => BrandAdminResource::make($this->whenLoaded('Brand')),
+            'model'         => ModelAdminResource::make($this->whenLoaded('Model')),
+            'photo'         => $this->photo,
+            'price'         => $this->price,
+            'date'          => Carbon::parse(strtotime($this->created_at))->format('d/m/Y')
         ];
     }
 }

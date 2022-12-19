@@ -16,9 +16,10 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
+            $table->text('description');
             $table->unsignedBigInteger('brand_id');
             $table->unsignedBigInteger('model_id');
-            $table->string('photo', 100);
+            $table->string('photo', 100)->nullable();
             $table->decimal('price', 10, 2);
 
             $table->foreign('brand_id')

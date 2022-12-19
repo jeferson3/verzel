@@ -26,11 +26,12 @@ class VehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required',
-            'brand_id'  => 'required|exists:brands,id',
-            'model_id'  => 'required|exists:models,id',
-            'photo'     => 'required',
-            'price'     => 'required',
+            'name'          => 'required',
+            'description'   => 'required',
+            'brand_id'      => 'required|exists:brands,id',
+            'model_id'      => 'required|exists:models,id',
+            'photo'         => 'required',
+            'price'         => 'required',
         ];
     }
 
