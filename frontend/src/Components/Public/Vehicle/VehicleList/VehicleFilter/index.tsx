@@ -4,12 +4,12 @@ import {Form} from "react-bootstrap";
 export const VehicleListFilter: React.FC = () => {
     return (
 
-        <div className="border">
+        <div>
                 <Form>
-                    <Form.Group>
-                        <Form.Label></Form.Label>
-                        <Form.Control></Form.Control>
-                    </Form.Group>
+                    {/*<Form.Group>*/}
+                    {/*    <Form.Label></Form.Label>*/}
+                    {/*    <Form.Control></Form.Control>*/}
+                    {/*</Form.Group>*/}
                 </Form>
         </div>
     );

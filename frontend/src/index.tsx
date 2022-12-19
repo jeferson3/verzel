@@ -14,6 +14,7 @@ import {Admin} from "./Pages/Admin";
 import {Home} from "./Pages/Public/Home";
 import {Vehicle} from "./Pages/Public/Vehicle";
 import {VehicleContextProvider} from "./Context/Public/VehicleContext";
+import {SpinnerContainer} from "./Components/Spinner";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,15 +25,18 @@ ReactDOM.render(
 
                 <Redirect from="/" to="/site" exact />
 
-                <Route
-                    path="/site"
-                    render={({ match: { url } }) => (
-                        <VehicleContextProvider>
-                            <Route path={`${url}`} component={Home} exact />
-                            <Route path={`${url}/veiculos`} component={Vehicle} />
-                        </VehicleContextProvider>
-                    )}
-                />
+                <VehicleContextProvider>
+                    <SpinnerContainer />
+                    <Route
+                        path="/site"
+                        render={({ match: { url } }) => (
+                            <>
+                                <Route path={`${url}`} component={Home} exact />
+                                <Route path={`${url}/veiculos`} component={Vehicle} />
+                            </>
+                        )}
+                    />
+                </VehicleContextProvider>
 
                 <Route path="/admin" component={Admin} />
                 <Route path="*" component={Page404} />

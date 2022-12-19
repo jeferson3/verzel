@@ -4,7 +4,7 @@ import {Form, InputGroup} from "react-bootstrap";
 export const VehicleSearch: React.FC = () => {
     return (
 
-        <div className={"alert-primary p-5"}>
+        <div>
             <InputGroup className="mb-3">
                 <Form.Control
                     aria-label="Small"

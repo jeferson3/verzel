@@ -14,7 +14,7 @@ export const Vehicle = () => {
 
     useEffect(function () {
         if (isMounted.current) {
-            getVehicles(vehicles.page, vehicles.per_page, dispatch);
+            getVehicles(1, 5, dispatch);
         }
         return () => {
             isMounted.current = false;
@@ -24,8 +24,7 @@ export const Vehicle = () => {
     return (
         <>
             <Menu />
-            <VehicleSearch />
-            <VehicleList vehicles={[]} />
+            <VehicleList vehicles={vehicles.data} />
         </>
     )
 }

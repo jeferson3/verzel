@@ -24,8 +24,10 @@ export interface StateVehicle {
     loading: boolean,
     vehicles: {
         data: IVehicle[],
+        pages: number,
         page: number,
         per_page: number,
+        total: number,
     }
 }
 

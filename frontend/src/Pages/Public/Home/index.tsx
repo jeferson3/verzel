@@ -26,7 +26,7 @@ export const Home = () => {
             <Menu />
             <CarouselVehicle vehicles={vehicles.data} />
             <div className='pt-5'>
-                <CardVehicleContainer vehicles={vehicles.data} />
+                <CardVehicleContainer vehicles={vehicles.data} showPrice={false} />
             </div>
             <FooterContainer />
         </>

@@ -22,6 +22,8 @@ export const getVehicles = (page: number = 1, per_page: number = 10, dispatch: R
             dispatch({
                 type: Types.SET_VEHICLES, payload: {
                     data: res.data.data,
+                    pages: res.data.pages,
+                    total: res.data.total,
                     page,
                     per_page
                 }

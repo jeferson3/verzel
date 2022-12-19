@@ -6,7 +6,7 @@ export const Menu = () => {
     return (
         <Navbar collapseOnSelect expand="lg">
             <Container>
-                <Navbar.Brand href="/">
+                <Navbar.Brand as={Link} to="/">
                     <Image src={process.env.PUBLIC_URL + "/logo.webp"} className="imageLogo" />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
