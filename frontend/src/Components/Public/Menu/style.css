@@ -1,0 +1,15 @@
+.imageLogo {
+    width: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .imageLogo {
+        width: 75px;
+    }
+    .btn-adm {
+        margin: 0 !important;
+    }
+    .nav-menu{
+        text-align: right;
+    }
+}

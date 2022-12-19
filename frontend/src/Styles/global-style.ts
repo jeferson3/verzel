@@ -20,5 +20,9 @@ export const GlobalStyle = createGlobalStyle`
     .disabled{
         cursor: not-allowed !important;
     }
+    
+    .text-left {
+      text-align: left !important;
+    }
 
 `

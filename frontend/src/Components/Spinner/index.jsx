@@ -1,6 +1,6 @@
 import { Spinner } from "react-bootstrap"
 import { useRepositoryContext } from "../../Context/Public/VehicleContext/context";
-import { Container } from "../Container"
+import { Container } from "../Styled/Container"
 
 export function SpinnerContainer() {
 

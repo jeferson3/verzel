@@ -1,10 +1,10 @@
 import Styled, { css } from "styled-components";
 
-export const Container = Styled.div`
+export const Container = Styled.div<{ height: string, centered: boolean, overlay: boolean  }>`
     
     width: 100%;
 
-    ${({ theme, height }) => {
+    ${({ height }) => {
 
         if (height) {
             return css`
