@@ -1,9 +1,9 @@
 export const data = {
     loading: false,
-    user: {
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') ?? '') : {
         id: undefined,
         name: undefined,
         email: undefined
     },
-    token: ""
+    token: localStorage.getItem('token') ?? ""
 }

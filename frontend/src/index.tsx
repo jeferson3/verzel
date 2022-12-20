@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './Styles/theme';
@@ -17,7 +17,7 @@ import {VehicleContextProvider} from "./Context/Public/VehicleContext";
 import {SpinnerContainer} from "./Components/Spinner";
 import {Login} from "./Pages/Auth/Login";
 import {AuthContextProvider} from "./Context/Auth";
-import {useAuthContext} from "./Context/Auth/context";
+import {PrivateRoute} from "./Services/PrivateRoute";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -35,34 +35,9 @@ ReactDOM.render(
                         <Route path="/site/veiculos" component={Vehicle} />
                     </VehicleContextProvider>
 
-                    <Route
-                        path="/admin"
-                        render={({ match: { url }, location }) => {
-
-                            const { state: { token } } = useAuthContext();
-
-                            return (
-                                <>
-                                    <h1>Olá admin</h1>
-                                    {
-                                        token ? (
-                                                <>
-                                                    <Route path={`${url}`} component={Admin} exact/>
-                                                </>
-                                            )
-                                            :
-                                            (
-                                                <Redirect
-                                                    to={{
-                                                        pathname: "/login",
-                                                        state: {from: location}
-                                                    }}
-                                                />
-                                            )
-                                    }
-                                </>)
-                        }}
-                    />
+                    <PrivateRoute path='/admin'>
+                        <Admin />
+                    </PrivateRoute>
 
                     <Route path="/auth/login" component={Login} exact />
 
