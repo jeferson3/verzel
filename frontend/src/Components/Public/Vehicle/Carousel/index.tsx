@@ -5,7 +5,7 @@ import { Carousel } from "react-bootstrap";
 import {CarouselItem} from "../../../Styled/Carousel";
 
 import "./style.css";
-import {IVehicle} from "../../../../types/context_vehicle";
+import {IVehicle} from "../../../../types/Public/context_vehicle";
 
 type Props = {
     vehicles: Array<IVehicle>

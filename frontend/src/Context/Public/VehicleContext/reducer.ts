@@ -2,7 +2,7 @@ import {
   ActionVehicle,
   StateVehicle,
   Types,
-} from "../../../types/context_vehicle";
+} from "../../../types/Public/context_vehicle";
 
 export const VehicleReducer = (
   state: StateVehicle,
@@ -16,6 +16,12 @@ export const VehicleReducer = (
 
     case Types.SET_VEHICLES:
       return { ...state, vehicles: action.payload };
+
+    case Types.SET_BRANDS:
+      return { ...state, brands: action.payload };
+
+    case Types.SET_MODELS:
+      return { ...state, models: action.payload };
 
     default:
       return { ...state };

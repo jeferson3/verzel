@@ -14,7 +14,7 @@ export const VehicleSearch: React.FC = () => {
         const search = e.target.value;
 
         if (search.length > 3) {
-            getVehicles(1, 5, search, dispatch);
+            getVehicles(1, 5, {search}, dispatch);
         }
     }
 

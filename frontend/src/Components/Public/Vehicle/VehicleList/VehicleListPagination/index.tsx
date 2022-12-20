@@ -1,6 +1,6 @@
 import "./style.css";
 import {Form, Pagination} from "react-bootstrap";
-import {IVehicle} from "../../../../../types/context_vehicle";
+import {IVehicle} from "../../../../../types/Public/context_vehicle";
 import {useVehicleContext} from "../../../../../Context/Public/VehicleContext/context";
 import {getVehicles} from "../../../../../Context/Public/VehicleContext/actions";
 
@@ -14,7 +14,7 @@ export const VehicleListPagination: React.FC<Props> = ({ vehicles }) => {
     const totalPages = Object.keys(new Array(pages).fill(null)).map(Number)
 
     const paginateVehicles = (pageNumber: number) => {
-        getVehicles(pageNumber, 5, "", dispatch);
+        getVehicles(pageNumber, 5, {}, dispatch);
     }
 
     return (

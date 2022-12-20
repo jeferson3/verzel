@@ -10,6 +10,16 @@ export interface IVehicle {
     value: string,
 }
 
+export interface IBrand {
+    id: number,
+    name: string,
+}
+
+export interface IModel {
+    id: number,
+    name: string,
+}
+
 export type ContextVehicleType = {
     state: StateVehicle,
     dispatch: React.Dispatch<ActionVehicle>
@@ -28,12 +38,20 @@ export interface StateVehicle {
         page: number,
         per_page: number,
         total: number,
+    },
+    brands: {
+        data: IBrand[]
+    },
+    models: {
+        data: IModel[]
     }
 }
 
 export enum Types {
     SET_LOADING = 'SET_LOADING',
-    SET_VEHICLES = 'SET_VEHICLES'
+    SET_VEHICLES = 'SET_VEHICLES',
+    SET_BRANDS = 'SET_BRANDS',
+    SET_MODELS = 'SET_MODELS',
 }
 
 export interface IVehicleResponseAPI {
@@ -45,3 +63,26 @@ export interface IVehicleResponseAPI {
     timestamp: string,
     total: number,
 }
+
+
+export interface IBrandResponseAPI {
+    data: Array<IBrand>,
+    status: boolean,
+    timestamp: string
+}
+
+export interface IModelResponseAPI {
+    data: Array<IBrand>,
+    status: boolean,
+    timestamp: string
+}
+
+
+export interface IFilterBuilder {
+    search?: string,
+    startPrice?: number,
+    endPrice?: number,
+    brandId?: number,
+    modelId?: number
+}
+

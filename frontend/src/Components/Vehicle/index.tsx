@@ -1,4 +1,4 @@
-import { IVehicle } from "../../types/context_vehicle"
+import { IVehicle } from "../../types/Public/context_vehicle"
 
 type Props = {
     vehicle: IVehicle

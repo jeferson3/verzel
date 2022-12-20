@@ -21,6 +21,8 @@ Route::group(['prefix' => '/v1'], function (){
     });
     Route::group(['prefix' => '/public'], function (){
         Route::get('/vehicles', [\App\Http\Controllers\VehiclesController::class, 'index']);
+        Route::get('/brands', [\App\Http\Controllers\VehiclesController::class, 'brands']);
+        Route::get('/models', [\App\Http\Controllers\VehiclesController::class, 'models']);
     });
     Route::group(['prefix' => '/admin'], function (){
         Route::apiResource('/vehicles', \App\Http\Controllers\Admin\VehiclesController::class);

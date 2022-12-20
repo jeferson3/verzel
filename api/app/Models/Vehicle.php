@@ -35,14 +35,41 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
         return $this->belongsTo(Model::class);
     }
 
-    public function pagination(int $page = 1, int $limit = 10, $filter = "", $type = '')
+    public function pagination(int $page = 1, int $limit = 10, $filter = "", int $startPrice = null, int $endPrice = null, int $brand_id = null, int $model_id = null, string $type = '')
     {
         $where = " 1=1 ";
         $bind  = array();
 
         if (!empty($filter)) {
             $where .= " AND (name like CONCAT('%', ?, '%') or description like CONCAT('%', ?, '%'))";
-            $bind = array($filter, $filter);
+            $bind[] = $filter;
+            $bind[] = $filter;
+        }
+
+        if ($startPrice || $endPrice) {
+            if ($startPrice && $endPrice) {
+                $where .= " AND (price >= ? AND price <= ?)";
+                $bind[] = $startPrice;
+                $bind[] = $endPrice;
+            }
+            else if ($startPrice && !$endPrice) {
+                $where .= " AND price >= ?";
+                $bind[] = $startPrice;
+            }
+            else if (!$startPrice && $endPrice) {
+                $where .= " AND price <= ?";
+                $bind[] = $endPrice;
+            }
+        }
+
+        if ($brand_id){
+            $where .= " AND brand_id = ?";
+            $bind[] = $brand_id;
+        }
+
+        if ($model_id){
+            $where .= " AND model_id = ?";
+            $bind[] = $model_id;
         }
 
         $data   = $this->whereRaw($where, $bind);

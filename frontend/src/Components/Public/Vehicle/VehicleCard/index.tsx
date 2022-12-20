@@ -1,7 +1,7 @@
-import {Button, Card, Col, Row} from "react-bootstrap";
+import {Badge, Button, Card, Col, Row} from "react-bootstrap";
 
 import "./style.css";
-import {IVehicle} from "../../../../types/context_vehicle";
+import {IVehicle} from "../../../../types/Public/context_vehicle";
 import {Link} from "react-router-dom";
 
 type MainProps = {
@@ -34,6 +34,8 @@ const CardVehicle: React.FC<Props> = ({vehicle, showPrice}) => {
             <Card.Body>
                 <Card.Title>{vehicle.name}</Card.Title>
                 <Card.Text>
+                    <Badge bg={"success"}>{vehicle.model}</Badge>
+                    <Badge className='ms-2'>{vehicle.brand}</Badge><br /><br />
                     {vehicle.description.substring(0, 50) + "..."}
                 </Card.Text>
                 {!showPrice && <Link to='site/veiculos'>Visualizar</Link>}

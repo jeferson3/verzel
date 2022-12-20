@@ -1,20 +1,28 @@
 import "./style.css";
 import {Menu} from "../../../Components/Public/Menu";
-import {VehicleSearch} from "../../../Components/Public/Vehicle/VehicleSearch";
 import {VehicleList} from "../../../Components/Public/Vehicle/VehicleList";
 import {useVehicleContext} from "../../../Context/Public/VehicleContext/context";
 import {useEffect, useRef} from "react";
-import {getVehicles} from "../../../Context/Public/VehicleContext/actions";
+import {getBrands, getModels, getVehicles} from "../../../Context/Public/VehicleContext/actions";
 
 export const Vehicle = () => {
 
 
-    const {state: {vehicles}, dispatch} = useVehicleContext();
+    const {state: {vehicles, brands, models}, dispatch} = useVehicleContext();
     const isMounted = useRef(true);
 
     useEffect(function () {
         if (isMounted.current) {
-            getVehicles(1, 5, "", dispatch);
+
+            (
+                async () => {
+                    await Promise.all([
+                        getVehicles(1, 5, {}, dispatch),
+                        getBrands(false, dispatch),
+                        getModels(false, dispatch)
+                    ]);
+                }
+            )()
         }
         return () => {
             isMounted.current = false;
@@ -24,7 +32,7 @@ export const Vehicle = () => {
     return (
         <>
             <Menu />
-            <VehicleList vehicles={vehicles.data} />
+            <VehicleList vehicles={vehicles.data} brands={brands.data} models={models.data} />
         </>
     )
 }
