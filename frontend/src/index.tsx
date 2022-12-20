@@ -15,6 +15,9 @@ import {Home} from "./Pages/Public/Home";
 import {Vehicle} from "./Pages/Public/Vehicle";
 import {VehicleContextProvider} from "./Context/Public/VehicleContext";
 import {SpinnerContainer} from "./Components/Spinner";
+import {Login} from "./Pages/Auth/Login";
+import {AuthContextProvider} from "./Context/Auth";
+import {useAuthContext} from "./Context/Auth/context";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,21 +28,46 @@ ReactDOM.render(
 
                 <Redirect from="/" to="/site" exact />
 
-                <VehicleContextProvider>
-                    <SpinnerContainer />
-                    <Route
-                        path="/site"
-                        render={({ match: { url } }) => (
-                            <>
-                                <Route path={`${url}`} component={Home} exact />
-                                <Route path={`${url}/veiculos`} component={Vehicle} />
-                            </>
-                        )}
-                    />
-                </VehicleContextProvider>
+                <AuthContextProvider>
+                    <VehicleContextProvider>
+                        <SpinnerContainer />
+                        <Route path="/site" component={Home} exact />
+                        <Route path="/site/veiculos" component={Vehicle} />
+                    </VehicleContextProvider>
 
-                <Route path="/admin" component={Admin} />
-                <Route path="*" component={Page404} />
+                    <Route
+                        path="/admin"
+                        render={({ match: { url }, location }) => {
+
+                            const { state: { token } } = useAuthContext();
+
+                            return (
+                                <>
+                                    <h1>Olá admin</h1>
+                                    {
+                                        token ? (
+                                                <>
+                                                    <Route path={`${url}`} component={Admin} exact/>
+                                                </>
+                                            )
+                                            :
+                                            (
+                                                <Redirect
+                                                    to={{
+                                                        pathname: "/login",
+                                                        state: {from: location}
+                                                    }}
+                                                />
+                                            )
+                                    }
+                                </>)
+                        }}
+                    />
+
+                    <Route path="/auth/login" component={Login} exact />
+
+                    <Route path="*" component={Page404} />
+                </AuthContextProvider>
 
             </Switch>
         </ThemeProvider>

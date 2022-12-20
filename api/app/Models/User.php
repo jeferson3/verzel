@@ -76,6 +76,11 @@ class User extends Authenticatable implements JWTSubject
         return [
             'status'    => true,
             'timestamp' => now(),
+            'user'      => [
+                'id'        => $user->id,
+                'name'      => $user->name,
+                'email'     => $user->email,
+            ],
             'token'     => $token
         ];
     }

@@ -1,4 +1,4 @@
-import {Button, Container, Image, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Container, Image, Nav, Navbar} from "react-bootstrap";
 import "./style.css";
 import {Link} from "react-router-dom";
 
@@ -17,9 +17,13 @@ export const Menu = () => {
                         <Nav.Link as={Link} to="/site/veiculos">Visite a loja</Nav.Link>
                         <Nav.Link as={Link} to="/site/veiculos">Trabalhe conosco</Nav.Link>
                         <Nav.Item className="btn-adm ms-4">
-                            <Button variant="outline-primary">
+                            <Link
+                                className="btn btn-outline-primary"
+                                role={"button"}
+                                to={"/auth/login"}
+                            >
                                 Área administrativa
-                            </Button>
+                            </Link>
                         </Nav.Item>
                     </Nav>
                 </Navbar.Collapse>

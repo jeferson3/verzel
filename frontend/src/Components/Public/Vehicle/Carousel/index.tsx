@@ -13,7 +13,6 @@ type Props = {
 
 export const CarouselVehicle: React.FC<Props> = ({ vehicles }) => {
 
-    console.log('vehicles', vehicles)
     return (
         <Carousel variant="dark">
             {
