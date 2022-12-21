@@ -26,7 +26,6 @@ export const Login = () => {
     }
 
     useEffect(function () {
-        console.log('isAuthtenticated', isAuthtenticated(state))
         if (isAuthtenticated(state) || localStorage.getItem('token')) {
             history.push('/admin')
         }
