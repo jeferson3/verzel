@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useAuthContext} from "../Context/Auth/context";
-import {Redirect, Route, RouteComponentProps} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 
 type Props = {
     children?: React.ReactNode,
@@ -8,26 +8,17 @@ type Props = {
 };
 export const PrivateRoute: React.FC<Props> = ({ children, path }) => {
 
-    const auth = useAuthContext();
+    const {state: {token, user}} = useAuthContext();
 
-    console.log([
-        auth.state.user,
-        auth.state.token
-    ])
     return (
         <Route
             path={path}
             exact
             render={({ location }) =>
-                auth.state.user && auth.state.token ? (
+                user && token ? (
                     children
                 ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/auth/login",
-                            state: { from: location }
-                        }}
-                    />
+                    <Redirect to="/auth/login" />
                 )
             }
         />

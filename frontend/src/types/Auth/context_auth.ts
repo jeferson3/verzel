@@ -30,6 +30,7 @@ export interface StateAuth {
 export enum Types {
     SET_LOADING = 'SET_LOADING',
     SET_LOGIN = 'SET_LOGIN',
+    SET_LOGOUT = 'SET_LOGOUT',
 }
 
 export interface ILoginResponseAPI {
@@ -45,4 +46,13 @@ export interface ILoginResponseErrorAPI {
         timestamp: string,
         message: string
     }
+}
+
+export interface ICheckAuthResponseAPI {
+    data: IUser,
+}
+
+export interface ICheckAuthResponseErrorAPI {
+    status: boolean,
+    message: string
 }

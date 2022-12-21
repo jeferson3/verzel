@@ -1,9 +1,10 @@
 import "./style.css";
+import {Menu} from "../../Components/Menu";
 
 export const Admin = () => {
   return (
-      <div>
-        <h1>Page Admin</h1>
+      <div className={"border"}>
+          <Menu isLoginPage={false} isSitePage={false} />
       </div>
   )
 }

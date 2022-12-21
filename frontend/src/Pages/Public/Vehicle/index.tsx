@@ -1,5 +1,5 @@
 import "./style.css";
-import {Menu} from "../../../Components/Public/Menu";
+import {Menu} from "../../../Components/Menu";
 import {VehicleList} from "../../../Components/Public/Vehicle/VehicleList";
 import {useVehicleContext} from "../../../Context/Public/VehicleContext/context";
 import {useEffect, useRef} from "react";
@@ -31,7 +31,7 @@ export const Vehicle = () => {
 
     return (
         <>
-            <Menu />
+            <Menu isLoginPage={false} isSitePage={true} />
             <VehicleList vehicles={vehicles.data} brands={brands.data} models={models.data} />
         </>
     )

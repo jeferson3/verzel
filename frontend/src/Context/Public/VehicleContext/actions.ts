@@ -5,7 +5,7 @@ import {
     IVehicleResponseAPI,
     IFilterBuilder
 } from '../../../types/Public/context_vehicle';
-import {PUBLIC_API as Api} from "../../../Services/Api";
+import {Api} from "../../../Services/ApiPublic";
 import {AxiosResponse} from 'axios';
 import React from "react";
 import {IBrandResponseAPI, IModelResponseAPI} from "../../../types/Public/context_vehicle";

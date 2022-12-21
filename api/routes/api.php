@@ -18,6 +18,7 @@ Route::group(['prefix' => '/v1'], function (){
     Route::group(['prefix' => '/auth'], function (){
         Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
         Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+        Route::get('/me', [\App\Http\Controllers\AuthController::class, 'me']);
     });
     Route::group(['prefix' => '/public'], function (){
         Route::get('/vehicles', [\App\Http\Controllers\VehiclesController::class, 'index']);

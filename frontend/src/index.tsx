@@ -29,6 +29,7 @@ ReactDOM.render(
                 <Redirect from="/" to="/site" exact />
 
                 <AuthContextProvider>
+
                     <VehicleContextProvider>
                         <SpinnerContainer />
                         <Route path="/site" component={Home} exact />
@@ -41,8 +42,10 @@ ReactDOM.render(
 
                     <Route path="/auth/login" component={Login} exact />
 
-                    <Route path="*" component={Page404} />
                 </AuthContextProvider>
+
+                <Route path="*" component={Page404} />
+
 
             </Switch>
         </ThemeProvider>

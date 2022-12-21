@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\FailResponse;
+use App\Http\Resources\ShowResponse;
 use App\Http\Resources\SuccessResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('jwt')
-            ->only('logout');
+            ->except('login');
     }
 
     /**
@@ -50,6 +51,7 @@ class AuthController extends Controller
             ->response()
             ->setStatusCode(401);
     }
+
     /**
      * @OA\Post (
      *     path="/auth/logout",
@@ -66,5 +68,21 @@ class AuthController extends Controller
         auth()->guard('api')->logout();
         return (new SuccessResponse(true))
             ->response();
+    }
+
+    /**
+     * @OA\Get (
+     *     path="/auth/me",
+     *     summary="AuthController",
+     *     @OA\Response(response="200", description="Response with success"),
+     *     tags={"Auth"},
+     *     security={{ "jwt": {} }}
+     *    )
+     *
+     * @return JsonResponse
+     */
+    public function me(): JsonResponse
+    {
+        return response()->json(auth()->user()->responseWithToken(\request()->header('token')), 200);
     }
 }
