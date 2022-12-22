@@ -1,6 +1,6 @@
 import {Modal} from "react-bootstrap";
 import "./style.css";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {BASE_URL} from "../../../../Environment";
 
 type Props = {
@@ -10,27 +10,6 @@ type Props = {
 }
 
 export const ModalShowVehicleImage: React.FC<Props> = ({image, show, setShow}) => {
-
-    const [base64, setBase64] = useState("");
-
-    // useEffect(function () {
-    //     getBase64Image(BASE_URL + '/storage/' + image);
-    // })
-
-    const getBase64Image = (url: string) => {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function() {
-            var reader = new FileReader();
-            reader.onloadend = function() {
-                setBase64(reader?.result?.toString() ?? '');
-
-            }
-            reader.readAsDataURL(xhr.response);
-        };
-        xhr.open('GET', url);
-        xhr.responseType = 'blob';
-        xhr.send();
-    }
 
     return (
         <Modal
