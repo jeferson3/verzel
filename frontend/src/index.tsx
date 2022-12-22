@@ -18,6 +18,8 @@ import {SpinnerContainer} from "./Components/Spinner";
 import {Login} from "./Pages/Auth/Login";
 import {AuthContextProvider} from "./Context/Auth";
 import {PrivateRoute} from "./Services/PrivateRoute";
+import {AdminContextProvider} from "./Context/Admin";
+import {VehicleAdmin} from "./Pages/Admin/Vehicle";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -34,13 +36,18 @@ ReactDOM.render(
                         <SpinnerContainer />
                         <Route path="/site" component={Home} exact />
                         <Route path="/site/veiculos" component={Vehicle} />
+
+                        <AdminContextProvider>
+                            <PrivateRoute path='/admin'>
+                                <Admin />
+                            </PrivateRoute>
+                            <PrivateRoute path='/admin/veiculos'>
+                                <VehicleAdmin />
+                            </PrivateRoute>
+                        </AdminContextProvider>
+
+                        <Route path="/auth/login" component={Login} exact />
                     </VehicleContextProvider>
-
-                    <PrivateRoute path='/admin'>
-                        <Admin />
-                    </PrivateRoute>
-
-                    <Route path="/auth/login" component={Login} exact />
 
                 </AuthContextProvider>
 

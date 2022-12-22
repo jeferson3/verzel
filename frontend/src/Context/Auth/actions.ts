@@ -1,4 +1,4 @@
-import {Api} from "../../Services/ApiAdmin";
+import {Api} from "../../Services/Api";
 // import {Api as Api_Without_Auth} from "../../Services/Api";
 import {AxiosError, AxiosResponse} from 'axios';
 import React from "react";
