@@ -5,15 +5,28 @@ import {StatCard} from "../../Components/Admin/StatCard";
 import {useAdminContext} from "../../Context/Admin/context";
 import {useEffect, useRef} from "react";
 import {getVehicles} from "../../Context/Admin/actions";
+import {useVehicleContext} from "../../Context/Public/VehicleContext/context";
+import {getBrands, getModels} from "../../Context/Public/VehicleContext/actions";
 
 export const Admin = () => {
 
-    const { state: { vehicles, brands, models }, dispatch } = useAdminContext();
-    const isMounted = useRef(true);
+    const { state: { vehicles }, dispatch } = useAdminContext();
+    const vehicleContext = useVehicleContext();
+    const { state: { models, brands } } = vehicleContext;
+
+        const isMounted = useRef(true);
 
     useEffect(function () {
         if (isMounted.current) {
-            getVehicles(1, 5, dispatch);
+            (
+                async function () {
+                    await Promise.all([
+                        getVehicles(1, 5, dispatch),
+                        getBrands(false, vehicleContext.dispatch),
+                        getModels(false, vehicleContext.dispatch)
+                    ])
+                }
+            )()
         }
         return () => {
             isMounted.current = false;
@@ -31,10 +44,10 @@ export const Admin = () => {
                         <StatCard variant={'primary'} value={vehicles?.total ?? 0} title={'Veículos cadastrados'} icon={'fas fa-car'}/>
                     </div>
                     <div className={'col-md-4'}>
-                        <StatCard variant={'danger'} value={brands?.length ?? 0} title={'Modelos cadastrados'} icon={'fas fa-car-side'}/>
+                        <StatCard variant={'danger'} value={brands.data.length ?? 0} title={'Modelos cadastrados'} icon={'fas fa-car-side'}/>
                     </div>
                     <div className={'col-md-4'}>
-                        <StatCard variant={'success'} value={models?.length ?? 0} title={'Marcas cadastradas'}
+                        <StatCard variant={'success'} value={models.data.length ?? 0} title={'Marcas cadastradas'}
                                   icon={'fas fa-plus-square'}/>
                     </div>
                 </div>

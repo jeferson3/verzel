@@ -8,6 +8,7 @@ import {ModalAddNewVehicle} from "../../../Components/Admin/Vehicle/ModalAdd";
 import {getBrands, getModels} from "../../../Context/Public/VehicleContext/actions";
 import {useVehicleContext} from "../../../Context/Public/VehicleContext/context";
 import {VehiclePagination} from "../../../Components/Admin/Vehicle/Pagination";
+import {ModalShowVehicleImage} from "../../../Components/Admin/Vehicle/ModalShowImage";
 export const VehicleAdmin = () => {
 
     const { state: { vehicles }, dispatch } = useAdminContext();
@@ -15,6 +16,8 @@ export const VehicleAdmin = () => {
     const isMounted = useRef(true);
 
     const [ showModalAdd, setShowModalAdd ] = useState<boolean>(false);
+    const [ showImageModal, setShowImageModal ] = useState<boolean>(false);
+    const [ imageModal, setImageModal ] = useState<string>("");
 
     useEffect(function () {
         if (isMounted.current) {
@@ -32,6 +35,11 @@ export const VehicleAdmin = () => {
             isMounted.current = false;
         }
     })
+
+    const showImageModalHandler = (image: string) => {
+        setImageModal(image);
+        setShowImageModal(true);
+    }
 
     return (
         <div>
@@ -67,12 +75,17 @@ export const VehicleAdmin = () => {
                                 <td>{v.brand?.name}</td>
                                 <td>{v.model?.name}</td>
                                 <td>{Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(v.price)}</td>
-                                <td>{
-                                    v.photo &&
-                                    <Button>
-                                        <i className="fas fa-image"></i>
-                                    </Button>
-                                }</td>
+                                <td>
+                                    {
+                                        v.photo &&
+                                            <Button onClick={e => showImageModalHandler(v.photo)}>
+                                                <i className="fas fa-image"></i>
+                                            </Button>
+                                    }
+                                    {
+                                        !v.photo && ' - '
+                                    }
+                                </td>
                                 <td>
                                     <Dropdown align={'end'}>
                                         <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -98,6 +111,7 @@ export const VehicleAdmin = () => {
                 </Table>
                 <VehiclePagination vehicles={vehicles.data} />
                 <ModalAddNewVehicle show={showModalAdd} setShow={setShowModalAdd} />
+                <ModalShowVehicleImage show={showImageModal} setShow={setShowImageModal} image={imageModal} />
 
             </Container>
         </div>
