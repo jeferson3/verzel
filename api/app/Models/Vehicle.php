@@ -106,6 +106,7 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
 
         return $this->create([
             'name'          => $data['name'],
+            'description'   => $data['description'],
             'brand_id'      => $data['brand_id'],
             'model_id'      => $data['model_id'],
             'photo'         => $path,
@@ -124,6 +125,7 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
 
         return $this->update([
             'name'          => $data['name'],
+            'description'   => $data['description'],
             'brand_id'      => $data['brand_id'],
             'model_id'      => $data['model_id'],
             'photo'         => $path,
