@@ -14,7 +14,7 @@ export const setLoading = (dispatch: React.Dispatch<ActionAdmin>) => {
     dispatch({type: Types.SET_LOADING});
 };
 
-export const getVehicles = (page: number = 1, per_page: number = 10, dispatch: React.Dispatch<ActionAdmin>) => {
+export const getVehicles = (page: number = 1, per_page: number = 5, dispatch: React.Dispatch<ActionAdmin>) => {
     setLoading(dispatch);
 
     Api({
@@ -42,6 +42,24 @@ export const getVehicles = (page: number = 1, per_page: number = 10, dispatch: R
 };
 
 
+export const deletarVehicle = (id: number, setShow: Function, dispatch: React.Dispatch<ActionAdmin>) => {
+    setLoading(dispatch);
+
+    Api({
+        url: "/admin/vehicles/" + id,
+        method: "DELETE",
+    })
+        .then((res: AxiosResponse<IPOSTVehicleResponseAPI>) => {
+            setShow(false)
+            alert(res.data.data.message);
+            getVehicles(1, 5, dispatch);
+        })
+        .finally(() => {
+            setLoading(dispatch);
+        });
+};
+
+
 export const saveVehicle = (body: IVehicle, clearForm: Function, setShow: Function, dispatch: React.Dispatch<ActionAdmin>) => {
 
     Api({
@@ -62,7 +80,7 @@ export const saveVehicle = (body: IVehicle, clearForm: Function, setShow: Functi
         .then((res: AxiosResponse<IPOSTVehicleResponseAPI>) => {
             clearForm();
             setShow(false);
-            getVehicles(1, 10, dispatch);
+            getVehicles(1, 5, dispatch);
             alert(res.data.data.message);
         })
         .catch((err: AxiosError<IPOSTVehiclesResponseErrorAPI>) => {

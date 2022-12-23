@@ -9,6 +9,7 @@ import {getBrands, getModels} from "../../../Context/Public/VehicleContext/actio
 import {useVehicleContext} from "../../../Context/Public/VehicleContext/context";
 import {VehiclePagination} from "../../../Components/Admin/Vehicle/Pagination";
 import {ModalShowVehicleImage} from "../../../Components/Admin/Vehicle/ModalShowImage";
+import {ModalDeleteVehicle} from "../../../Components/Admin/Vehicle/ModalDelete";
 export const VehicleAdmin = () => {
 
     const { state: { vehicles }, dispatch } = useAdminContext();
@@ -16,8 +17,10 @@ export const VehicleAdmin = () => {
     const isMounted = useRef(true);
 
     const [ showModalAdd, setShowModalAdd ] = useState<boolean>(false);
+    const [ showModalDelete, setShowModalDelete ] = useState<boolean>(false);
     const [ showImageModal, setShowImageModal ] = useState<boolean>(false);
     const [ imageModal, setImageModal ] = useState<string>("");
+    const [ idModal, setIdModal ] = useState<number>(0);
 
     useEffect(function () {
         if (isMounted.current) {
@@ -39,6 +42,11 @@ export const VehicleAdmin = () => {
     const showImageModalHandler = (image: string) => {
         setImageModal(image);
         setShowImageModal(true);
+    }
+
+    const showDeleteModalHandler = (id: number) => {
+        setIdModal(id);
+        setShowModalDelete(true);
     }
 
     return (
@@ -88,7 +96,7 @@ export const VehicleAdmin = () => {
                                 </td>
                                 <td>
                                     <Dropdown align={'end'}>
-                                        <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                        <Dropdown.Toggle variant="success" className={'btn-sm'} id="dropdown-basic">
                                             <i className={'fas fa-list'}></i>
                                         </Dropdown.Toggle>
 
@@ -97,7 +105,7 @@ export const VehicleAdmin = () => {
                                                 <i className={'fas fa-edit text-primary'}></i>
                                                 <span className={'ms-1'}>Editar</span>
                                             </Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">
+                                            <Dropdown.Item onClick={e => showDeleteModalHandler(v.id)}>
                                                 <i className={'fas fa-trash text-danger'}></i>
                                                 <span className={'ms-1'}>Deletar</span>
                                             </Dropdown.Item>
@@ -112,7 +120,7 @@ export const VehicleAdmin = () => {
                 <VehiclePagination vehicles={vehicles.data} />
                 <ModalAddNewVehicle show={showModalAdd} setShow={setShowModalAdd} />
                 <ModalShowVehicleImage show={showImageModal} setShow={setShowImageModal} image={imageModal} />
-
+                <ModalDeleteVehicle id={idModal} setShow={setShowModalDelete} show={showModalDelete} />
             </Container>
         </div>
     )
