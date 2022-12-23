@@ -1,0 +1,15 @@
+.dropdown-toggle::after {
+    display: none;
+}
+
+.btn-menu, .dropdown-toggle, .show>.btn-success.dropdown-toggle {
+    background: none;
+    border: none;
+    color: black;
+}
+
+.btn-menu:hover, .btn-menu:focus {
+    background: none;
+    border: none;
+    color: black;
+}

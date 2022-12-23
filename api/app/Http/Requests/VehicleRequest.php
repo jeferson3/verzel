@@ -30,7 +30,7 @@ class VehicleRequest extends FormRequest
             'description'   => 'required',
             'brand_id'      => 'required|exists:brands,id',
             'model_id'      => 'required|exists:models,id',
-            'photo'         => 'required',
+            'photo'         => $this->request->get('_method') && $this->request->get('_method') == 'PUT' ? '' : 'required',
             'price'         => 'required',
         ];
     }

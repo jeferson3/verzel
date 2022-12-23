@@ -70,7 +70,7 @@ class VehiclesController extends Controller
         $page   = $request->get('page') ?? 1;
         $search = $request->get('search') ?? "";
 
-        return (new PaginationResponse($this->model->pagination($page, $limite, $search, null, null, null, null, Vehicle::ADMIN)))
+        return (new PaginationResponse($this->model->pagination($page, $limite, $search, 'id', null, null, null, null, Vehicle::ADMIN)))
             ->response()
             ->setStatusCode(200);
     }
@@ -168,7 +168,7 @@ class VehiclesController extends Controller
      *              mediaType="multipart/form-data",
      *              @OA\Schema(
      *                  type="object",
-     *                  required={"_method", "name", "brand_id", "model_id", "photo", "price"},
+     *                  required={"_method", "name", "brand_id", "model_id", "price"},
      *                  @OA\Property(property="_method", type="string" , example="PUT"),
      *                  @OA\Property(property="name", type="string" , example="name"),
      *                  @OA\Property(property="description", type="string" , example="description"),

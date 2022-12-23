@@ -13,7 +13,7 @@ class VehicleFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
-            'brand_id' => random_int(1, 5),
+            'brand_id' => random_int(1, 43),
             'model_id' => random_int(1, 5),
             'price' => $this->faker->randomFloat(2, 10000, 1000000),
         ];

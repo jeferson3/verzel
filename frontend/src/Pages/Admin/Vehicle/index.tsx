@@ -10,6 +10,8 @@ import {useVehicleContext} from "../../../Context/Public/VehicleContext/context"
 import {VehiclePagination} from "../../../Components/Admin/Vehicle/Pagination";
 import {ModalShowVehicleImage} from "../../../Components/Admin/Vehicle/ModalShowImage";
 import {ModalDeleteVehicle} from "../../../Components/Admin/Vehicle/ModalDelete";
+import {IVehicle} from "../../../types/Admin/context_admin";
+import {ModalUpdateVehicle} from "../../../Components/Admin/Vehicle/ModalUpdate";
 export const VehicleAdmin = () => {
 
     const { state: { vehicles }, dispatch } = useAdminContext();
@@ -18,9 +20,11 @@ export const VehicleAdmin = () => {
 
     const [ showModalAdd, setShowModalAdd ] = useState<boolean>(false);
     const [ showModalDelete, setShowModalDelete ] = useState<boolean>(false);
+    const [ showModalUpdate, setShowModalUpdate ] = useState<boolean>(false);
     const [ showImageModal, setShowImageModal ] = useState<boolean>(false);
     const [ imageModal, setImageModal ] = useState<string>("");
     const [ idModal, setIdModal ] = useState<number>(0);
+    const [ vehicleModal, setVehicleModal ] = useState<IVehicle>({id: 0, name: '', description: '', price: 0, brand: {id: 0, name: ''}, model: {id: 0, name: ''}, photo: ''});
 
     useEffect(function () {
         if (isMounted.current) {
@@ -47,6 +51,11 @@ export const VehicleAdmin = () => {
     const showDeleteModalHandler = (id: number) => {
         setIdModal(id);
         setShowModalDelete(true);
+    }
+
+    const showUpdateModalHandler = (vehicle: IVehicle) => {
+        setVehicleModal(vehicle);
+        setShowModalUpdate(true);
     }
 
     return (
@@ -86,8 +95,8 @@ export const VehicleAdmin = () => {
                                 <td>
                                     {
                                         v.photo &&
-                                            <Button onClick={e => showImageModalHandler(v.photo)}>
-                                                <i className="fas fa-image"></i>
+                                            <Button variant={'default'} onClick={e => showImageModalHandler(v.photo)}>
+                                                <i className="fas fa-image text-primary"></i>
                                             </Button>
                                     }
                                     {
@@ -96,12 +105,12 @@ export const VehicleAdmin = () => {
                                 </td>
                                 <td>
                                     <Dropdown align={'end'}>
-                                        <Dropdown.Toggle variant="success" className={'btn-sm'} id="dropdown-basic">
-                                            <i className={'fas fa-list'}></i>
+                                        <Dropdown.Toggle variant="success" className={'btn-menu btn-sm'} id="dropdown-basic">
+                                            <i className="fas fa-ellipsis-v"></i>
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu>
-                                            <Dropdown.Item href="#/action-1">
+                                            <Dropdown.Item onClick={e => showUpdateModalHandler(v)}>
                                                 <i className={'fas fa-edit text-primary'}></i>
                                                 <span className={'ms-1'}>Editar</span>
                                             </Dropdown.Item>
@@ -121,6 +130,7 @@ export const VehicleAdmin = () => {
                 <ModalAddNewVehicle show={showModalAdd} setShow={setShowModalAdd} />
                 <ModalShowVehicleImage show={showImageModal} setShow={setShowImageModal} image={imageModal} />
                 <ModalDeleteVehicle id={idModal} setShow={setShowModalDelete} show={showModalDelete} />
+                <ModalUpdateVehicle vehicle={vehicleModal} setShow={setShowModalUpdate} show={showModalUpdate} />
             </Container>
         </div>
     )

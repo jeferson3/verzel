@@ -60,21 +60,43 @@ export const deleteVehicle = (id: number, setShow: Function, dispatch: React.Dis
 };
 
 
-export const updateVehicle = (id: number, setShow: Function, dispatch: React.Dispatch<ActionAdmin>) => {
+export const updateVehicle = (id: number, body: IVehicle, clearForm: Function, setShow: Function, dispatch: React.Dispatch<ActionAdmin>) => {
     setLoading(dispatch);
 
     Api({
         url: "/admin/vehicles/" + id,
-        method: "DELETE",
+        method: "POST",
+        data: {
+            _method: 'PUT',
+            name: body.name,
+            description: body.description,
+            price: body.price,
+            photo: body.photo ? dataURLtoFile(body.photo) : '',
+            model_id: body.model.id,
+            brand_id: body.brand.id,
+        },
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+
     })
         .then((res: AxiosResponse<IPOSTVehicleResponseAPI>) => {
-            setShow(false)
-            alert(res.data.data.message);
+            clearForm();
+            setShow(false);
             getVehicles(1, 5, dispatch);
+            alert(res.data.data.message);
         })
-        .finally(() => {
-            setLoading(dispatch);
-        });
+        .catch((err: AxiosError<IPOSTVehiclesResponseErrorAPI>) => {
+            if (err.code === "ERR_BAD_REQUEST"){
+                alert(err.response?.data.message);
+                let msg = err.response?.data.errors.map((e, index) => `${index + 1} - ${e}` + '\n' ).join();
+                alert(msg);
+            }
+            else {
+                alert(err.message);
+            }
+        })
+        .finally(() => setLoading(dispatch))
 };
 
 

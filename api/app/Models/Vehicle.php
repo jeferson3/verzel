@@ -35,7 +35,7 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
         return $this->belongsTo(Model::class);
     }
 
-    public function pagination(int $page = 1, int $limit = 10, $filter = "", int $startPrice = null, int $endPrice = null, int $brand_id = null, int $model_id = null, string $type = '')
+    public function pagination(int $page = 1, int $limit = 10, $filter = "", string $order = 'id', int $startPrice = null, int $endPrice = null, int $brand_id = null, int $model_id = null, string $type = '')
     {
         $where = " 1=1 ";
         $bind  = array();
@@ -76,12 +76,12 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
         $total  = $data->count();
         $res    = [];
         if ($type === self::ADMIN) {
-            $res = $data->orderBy('price', 'desc')
+            $res = $data->orderBy($order, 'desc')
                 ->with(['Brand', 'Model'])
                 ->limit($limit)->offset(($page - 1) * $limit)->get();
         }
         else if ($type === self::PUBLIC) {
-            $res = $data->orderBy('price', 'desc')
+            $res = $data->orderBy($order, 'desc')
                 ->limit($limit)->offset(($page - 1) * $limit)->get();
         }
         return [
@@ -114,14 +114,17 @@ class Vehicle extends \Illuminate\Database\Eloquent\Model
         ]);
     }
 
-    public function updateVehicle(Vehicle $vehicle, array $data, UploadedFile $photo)
+    public function updateVehicle(Vehicle $vehicle, array $data, UploadedFile $photo = null)
     {
-        if (Storage::disk('public')->exists($vehicle->photo)){
+        $path = null;
+
+        if (!is_null($photo) && Storage::disk('public')->exists($vehicle->photo)){
             Storage::disk('public')->delete($vehicle->photo);
         }
-
-        $fileName = date('YdmHis') . '_' . uniqid(time()) . '.' . $photo->getClientOriginalExtension();
-        $path = $photo->storeAs('vehicles', $fileName, 'public');
+        if (!is_null($photo)){
+            $fileName = date('YdmHis') . '_' . uniqid(time()) . '.' . $photo->getClientOriginalExtension();
+            $path = $photo->storeAs('vehicles', $fileName, 'public');
+        }
 
         return $this->update([
             'name'          => $data['name'],

@@ -107,7 +107,7 @@ class VehiclesController extends Controller
         $brandId = $request->get('brandId');
         $modelId = $request->get('modelId');
 
-        return (new PaginationResponse($this->model->pagination($page, $limite, $search, $startPrice, $endPrice, $brandId, $modelId, Vehicle::PUBLIC)))
+        return (new PaginationResponse($this->model->pagination($page, $limite, $search, 'price', $startPrice, $endPrice, $brandId, $modelId, Vehicle::PUBLIC)))
             ->response()
             ->setStatusCode(200);
     }
