@@ -13,13 +13,13 @@ export const VehicleSearch: React.FC = () => {
         setSearch(e.target.value);
 
         if (e.target.value.length > 3) {
-            getVehicles(1, 5, {search}, dispatch);
+            getVehicles(1, 10, {search}, dispatch);
         }
     }
 
     const clearSearch = () => {
         setSearch("");
-        getVehicles(1, 5, {}, dispatch);
+        getVehicles(1, 10, {}, dispatch);
     }
 
     return (

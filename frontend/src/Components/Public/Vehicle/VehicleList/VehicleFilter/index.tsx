@@ -21,7 +21,7 @@ export const VehicleListFilter: React.FC<Props> = ({brands, models}) => {
 
     const filterVehicles = () => {
 
-        getVehicles(1, 5, {
+        getVehicles(1, 10, {
                 startPrice,
                 endPrice,
                 brandId,

@@ -14,7 +14,7 @@ export const Home = () => {
 
     useEffect(function () {
         if (isMounted.current) {
-            getVehicles(1, 3, {}, dispatch);
+            getVehicles(1, 9, {}, dispatch);
         }
         return () => {
             isMounted.current = false;

@@ -21,7 +21,7 @@ export const Admin = () => {
             (
                 async function () {
                     await Promise.all([
-                        getVehicles(1, 5, dispatch),
+                        getVehicles(1, 10, dispatch),
                         getBrands(false, vehicleContext.dispatch),
                         getModels(false, vehicleContext.dispatch)
                     ])

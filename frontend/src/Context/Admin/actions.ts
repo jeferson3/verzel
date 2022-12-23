@@ -52,7 +52,7 @@ export const deleteVehicle = (id: number, setShow: Function, dispatch: React.Dis
         .then((res: AxiosResponse<IPOSTVehicleResponseAPI>) => {
             setShow(false)
             alert(res.data.data.message);
-            getVehicles(1, 5, dispatch);
+            getVehicles(1, 10, dispatch);
         })
         .finally(() => {
             setLoading(dispatch);
@@ -83,7 +83,7 @@ export const updateVehicle = (id: number, body: IVehicle, clearForm: Function, s
         .then((res: AxiosResponse<IPOSTVehicleResponseAPI>) => {
             clearForm();
             setShow(false);
-            getVehicles(1, 5, dispatch);
+            getVehicles(1, 10, dispatch);
             alert(res.data.data.message);
         })
         .catch((err: AxiosError<IPOSTVehiclesResponseErrorAPI>) => {
@@ -120,7 +120,7 @@ export const saveVehicle = (body: IVehicle, clearForm: Function, setShow: Functi
         .then((res: AxiosResponse<IPOSTVehicleResponseAPI>) => {
             clearForm();
             setShow(false);
-            getVehicles(1, 5, dispatch);
+            getVehicles(1, 10, dispatch);
             alert(res.data.data.message);
         })
         .catch((err: AxiosError<IPOSTVehiclesResponseErrorAPI>) => {

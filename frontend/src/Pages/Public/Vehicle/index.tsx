@@ -17,7 +17,7 @@ export const Vehicle = () => {
             (
                 async () => {
                     await Promise.all([
-                        getVehicles(1, 5, {}, dispatch),
+                        getVehicles(1, 10, {}, dispatch),
                         getBrands(false, dispatch),
                         getModels(false, dispatch)
                     ]);
