@@ -49,9 +49,10 @@ ReactDOM.render(
                         <Route path="/auth/login" component={Login} exact />
                     </VehicleContextProvider>
 
+                    <Route path="*" component={Page404} exact />
+
                 </AuthContextProvider>
 
-                <Route path="*" component={Page404} />
 
 
             </Switch>

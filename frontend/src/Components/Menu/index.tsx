@@ -45,8 +45,6 @@ export const Menu: React.FC<Props> = ({ isLoginPage, isSitePage }) => {
                             {
                                 isAuthtenticated(state) && !isSitePage && <>
                                     <Nav.Link as={Link} to="/admin/veiculos">Veículos</Nav.Link>
-                                    <Nav.Link as={Link} to="/admin/marcas">Marcas</Nav.Link>
-                                    <Nav.Link as={Link} to="/admin/modelos">Modelos</Nav.Link>
                                 </>
                             }
                                 <Nav.Item className="btn-adm ms-4">
