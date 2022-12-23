@@ -2,7 +2,7 @@ import {Button, Modal} from "react-bootstrap";
 import "./style.css";
 import React from "react";
 import {useAdminContext} from "../../../../Context/Admin/context";
-import {deletarVehicle} from "../../../../Context/Admin/actions";
+import {deleteVehicle} from "../../../../Context/Admin/actions";
 
 type Props = {
     show: boolean,
@@ -14,7 +14,7 @@ export const ModalDeleteVehicle: React.FC<Props> = ({id, show, setShow}) => {
 
     const { dispatch } = useAdminContext();
     const deletarHandler = () => {
-        deletarVehicle(id, setShow, dispatch);
+        deleteVehicle(id, setShow, dispatch);
     }
 
     return (

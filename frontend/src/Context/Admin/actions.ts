@@ -42,7 +42,25 @@ export const getVehicles = (page: number = 1, per_page: number = 5, dispatch: Re
 };
 
 
-export const deletarVehicle = (id: number, setShow: Function, dispatch: React.Dispatch<ActionAdmin>) => {
+export const deleteVehicle = (id: number, setShow: Function, dispatch: React.Dispatch<ActionAdmin>) => {
+    setLoading(dispatch);
+
+    Api({
+        url: "/admin/vehicles/" + id,
+        method: "DELETE",
+    })
+        .then((res: AxiosResponse<IPOSTVehicleResponseAPI>) => {
+            setShow(false)
+            alert(res.data.data.message);
+            getVehicles(1, 5, dispatch);
+        })
+        .finally(() => {
+            setLoading(dispatch);
+        });
+};
+
+
+export const updateVehicle = (id: number, setShow: Function, dispatch: React.Dispatch<ActionAdmin>) => {
     setLoading(dispatch);
 
     Api({
